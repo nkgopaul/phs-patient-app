@@ -9,9 +9,6 @@ export default class MedicineScreen extends React.Component {
 
   constructor() {
     super();
-    getPatientData("Chris", "Riesbeck", 1477309036, 1477309756).then(data => {
-      // console.error(data);
-    });
   }
 
   render() {
