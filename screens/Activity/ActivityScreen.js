@@ -6,6 +6,8 @@ import {
     View,
 } from 'react-native';
 import HRGraph from './HeartRate/HRGraph';
+import StepGraph from './StepCount/StepGraph';
+import StepTracker from './StepCount/StepTracker';
 import { UserConsumer } from '../../UserContext';
 
 
@@ -37,6 +39,18 @@ export default class ActivityScreen extends React.Component {
                                 </View>
                             </View>
                         </View>
+                        <View style={styles.container}>
+                            <View style={styles.sectionTextContainer}>
+                                <Text style={styles.sectionText}>👣 Steps</Text>
+                            </View>
+                            <StepGraph 
+                                stepMeasures={userData.step_measures}
+                            />
+                            <StepTracker
+                                totalSteps={userData.step_measures.reduce((acc, obj) => acc + obj['num_steps'], 0)}
+                                targetSteps={3000}
+                            />
+                        </View>
                     </ScrollView>
                 )}
             </UserConsumer>
@@ -48,6 +62,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        marginTop: 10,
+        marginLeft: 10,
+        marginRight: 10,
+        borderRadius: 5,
     },
     sectionTextContainer: {
         paddingTop: 10,
@@ -71,7 +89,6 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         fontSize: 16,
         fontWeight: 'bold',
-        textDecorationLine: 'underline',
     },
     metricEntry: {
         textAlignVertical: 'center',
