@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import ActivityScreen from '../screens/Activity/ActivityScreen';
+import SummaryScreen from '../screens/Summary/SummaryScreen';
 import MedicineScreen from '../screens/Medicine/MedicineScreen';
 import InboxScreen from '../screens/Inbox/InboxScreen';
 import ResourcesScreen from '../screens/Resources/ResourcesScreen';
@@ -13,12 +13,12 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
-const ActivityStack = createStackNavigator({
-  Activity: ActivityScreen,
+const SummaryStack = createStackNavigator({
+  Summary: SummaryScreen,
 });
 
-ActivityStack.navigationOptions = {
-  tabBarLabel: 'Activity',
+SummaryStack.navigationOptions = {
+  tabBarLabel: 'Summary',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -116,7 +116,7 @@ ResourcesStack.navigationOptions = {
 // };
 
 export default createBottomTabNavigator({
-  ActivityStack,
+  SummaryStack,
   MedicineStack,
   InboxStack,
   ResourcesStack,

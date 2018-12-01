@@ -8,12 +8,13 @@ import {
 import HRGraph from './HeartRate/HRGraph';
 import StepGraph from './StepCount/StepGraph';
 import StepTracker from './StepCount/StepTracker';
+import ActivityGraph from './Activity/ActivityGraph';
 import { UserConsumer } from '../../UserContext';
 
 
-export default class ActivityScreen extends React.Component {
+export default class Summary extends React.Component {
     static navigationOptions = {
-        title: 'Your Daily Activity',
+        title: 'Your Daily Summary',
     };
 
     render() {
@@ -30,7 +31,7 @@ export default class ActivityScreen extends React.Component {
                             />
                             <View style={styles.metricsContainer}>
                                 <View style={styles.metricContainer}>
-                                    <Text style={styles.metricHeader}>Average HR</Text>
+                                    <Text style={styles.metricHeader}>Current HR</Text>
                                     <Text style={styles.metricEntry}>79 BPM</Text>
                                 </View>
                                 <View style={styles.metricContainer}>
@@ -49,6 +50,14 @@ export default class ActivityScreen extends React.Component {
                             <StepTracker
                                 totalSteps={userData.step_measures.reduce((acc, obj) => acc + obj['num_steps'], 0)}
                                 targetSteps={3000}
+                            />
+                        </View>
+                        <View style={styles.container}>
+                            <View style={styles.sectionTextContainer}>
+                                <Text style={styles.sectionText}>🤸 Activity</Text>
+                            </View>
+                            <ActivityGraph
+                                activityMeasures={userData.activity_type_measures}
                             />
                         </View>
                     </ScrollView>
