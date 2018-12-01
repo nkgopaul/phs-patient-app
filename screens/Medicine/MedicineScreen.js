@@ -5,7 +5,7 @@ import { UserConsumer } from '../../UserContext';
 
 export default class MedicineScreen extends React.Component {
   static navigationOptions = {
-    title: 'Your Medications',
+    title: 'Medications',
   };
 
   render() {

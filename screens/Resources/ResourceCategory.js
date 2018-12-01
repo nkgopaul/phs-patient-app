@@ -9,9 +9,8 @@ import {
 import Collapsible from 'react-native-collapsible';
 import { Icon } from 'expo';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import Barcode from 'react-native-barcode-builder';
 
-export default class Medicine extends React.Component {
+export default class ResourceCategory extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,15 +22,17 @@ export default class Medicine extends React.Component {
         this.setState({ collapsed: !this.state.collapsed });
     };
 
-    handlePress = () => {
-        Linking.openURL(this.props.url);
-    };
-
     render() {
         return(
             <View>
                 <TouchableOpacity onPress={this.toggleExpanded}>
                     <View style={styles.headerContainer}>
+                        <MaterialCommunityIcons 
+                            name={this.props.icon_name}
+                            size={26}
+                            color='black'
+                            style={{paddingLeft: 10}}
+                        />
                         <Text style={styles.headerText}>{this.props.name}</Text>
                         <Icon.Ionicons
                           name='md-arrow-dropdown'
@@ -43,42 +44,18 @@ export default class Medicine extends React.Component {
                 </TouchableOpacity>
                 <Collapsible collapsed={this.state.collapsed}>
                     <View style={styles.contentContainer}>
-                        <View style={styles.contentRowContainer}>
-                            <MaterialCommunityIcons 
-                                name='needle'
-                                size={26}
-                                color='black'
-                                style={{paddingRight: 5}}
-                            />
-                            <Text style={styles.contentText}>{`${this.props.dosageAmount}, ${this.props.dosageInstructions}`}</Text>
-                        </View>
-                        <View style={styles.contentRowContainer}>
-                            <MaterialCommunityIcons 
-                                name='note-text'
-                                size={26}
-                                color='black'
-                                style={{paddingRight: 5}}
-                            />
-                            <Text style={styles.contentText}>{this.props.notes}</Text>
-                        </View>
-                        <View style={styles.contentRowContainer}>
-                            <MaterialCommunityIcons 
-                                name='link'
-                                size={26}
-                                color='black'
-                                style={{paddingRight: 5}}
-                            />
-                            <Text 
-                                style={styles.linkText} 
-                                onPress={this.handlePress}>
-                                {'Click here for more info.'}
-                            </Text>
-                        </View>
-                        <Barcode
-                            value={this.props.name}
-                            format="CODE128"
-                            height={50}
-                        />
+                        {
+                            this.props.resources.map(e => 
+                                <View style={styles.contentRowContainer} key={e.name}>
+                                    <Text style={{fontSize: 15}}>{'• '}</Text>
+                                    <Text
+                                        style={styles.linkText}
+                                        onPress={() => { Linking.openURL(e.url) }}
+                                    >
+                                        {e.name}
+                                    </Text>
+                                </View>
+                        )}
                     </View>
                 </Collapsible>
             </View>
@@ -97,7 +74,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontSize: 18,
-        paddingLeft: 25,
+        paddingLeft: 5,
         paddingTop: 5,
         paddingBottom: 5,
     },
@@ -114,9 +91,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         paddingLeft: 30,
         paddingRight: 10,
-    },
-    contentText: {
-        fontSize: 15
     },
     contentRowContainer: {
         width: '95%',

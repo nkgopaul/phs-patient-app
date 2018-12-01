@@ -3,18 +3,17 @@ import {
     Text,
     View,
 } from 'react-native';
+import ResourcesList from './ResourcesList';
 
 
 export default class ResourcesScreen extends React.Component {
     static navigationOptions = {
-        header: null,
+        title: 'Resources',
     };
 
     render() {
         return (
-            <View>
-                <Text>ResourcesScreen</Text>
-            </View>
+            <ResourcesList />
         )
     }
 }

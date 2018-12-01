@@ -14,7 +14,7 @@ import { UserConsumer } from '../../UserContext';
 
 export default class Summary extends React.Component {
     static navigationOptions = {
-        title: 'Your Daily Summary',
+        title: 'Daily Summary',
     };
 
     render() {
